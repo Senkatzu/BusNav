@@ -13,17 +13,16 @@
 </head>
 <body>
     <aside class="icon-sidebar" id="iconSidebar">
-    <ul>
-        <li><a href="#home" title="Home"><i class="fas fa-home"></i></a></li>
-        <li><a href="#map-routes" title="Map & Routes"><i class="fas fa-map"></i></a></li>
-        <li><a href="#crowding-predictions" title="Crowding"><i class="fas fa-chart-bar"></i></a></li>
-        <li><a href="#ar-finder" title="AR Finder"><i class="fas fa-camera"></i></a></li>
-        <li><a href="#community-feedback" title="Feedback"><i class="fas fa-comments"></i></a></li>
-        <li><a href="#offline-access" title="Offline"><i class="fas fa-download"></i></a></li>
-        <li><a href="#operators" title="Operators"><i class="fas fa-user-tie"></i></a></li>
-    </ul>
-</aside>
-
+        <ul>
+            <li><a href="#home" title="Home"><i class="fas fa-home"></i></a></li>
+            <li><a href="#map-routes" title="Map & Routes"><i class="fas fa-map"></i></a></li>
+            <li><a href="#crowding-predictions" title="Crowding"><i class="fas fa-chart-bar"></i></a></li>
+            <li><a href="#ar-finder" title="AR Finder"><i class="fas fa-camera"></i></a></li>
+            <li><a href="#community-feedback" title="Feedback"><i class="fas fa-comments"></i></a></li>
+            <li><a href="#offline-access" title="Offline"><i class="fas fa-download"></i></a></li>
+            <li><a href="#operators" title="Operators"><i class="fas fa-user-tie"></i></a></li>
+        </ul>
+    </aside>
 
     <header>
         <div class="container">
@@ -272,22 +271,6 @@
             </div>
         </div>
     </div>
-
-    <script>
-        // Sidebar open/close logic
-        document.getElementById('sidebarHamburger').onclick = function() {
-            document.getElementById('sidebarNav').classList.add('open');
-        };
-        document.getElementById('sidebarCloseBtn').onclick = function() {
-            document.getElementById('sidebarNav').classList.remove('open');
-        };
-        // Optional: close sidebar when clicking a link
-        document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
-            link.onclick = function() {
-                document.getElementById('sidebarNav').classList.remove('open');
-            };
-        });
-    </script>
 
     <!-- Leaflet JS for interactive map -->
     <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
