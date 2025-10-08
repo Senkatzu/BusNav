@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BusNav - Your Smart Bus Companion</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <!-- Leaflet CSS for interactive map -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+<body>
+    <aside class="icon-sidebar" id="iconSidebar">
+    <ul>
+        <li><a href="#home" title="Home"><i class="fas fa-home"></i></a></li>
+        <li><a href="#map-routes" title="Map & Routes"><i class="fas fa-map"></i></a></li>
+        <li><a href="#crowding-predictions" title="Crowding"><i class="fas fa-chart-bar"></i></a></li>
+        <li><a href="#ar-finder" title="AR Finder"><i class="fas fa-camera"></i></a></li>
+        <li><a href="#community-feedback" title="Feedback"><i class="fas fa-comments"></i></a></li>
+        <li><a href="#offline-access" title="Offline"><i class="fas fa-download"></i></a></li>
+        <li><a href="#operators" title="Operators"><i class="fas fa-user-tie"></i></a></li>
+    </ul>
+</aside>
+
+
+    <header>
+        <div class="container">
+            <a href="#hero" class="logo">BusNav</a>
+            <!-- Old nav removed -->
+        </div>
+    </header>
+
+
+    <main>
+        <section id="hero" class="hero-section">
+            <div class="container">
+                <div class="hero-content">
+                    <h2>Navigate Your City Smarter</h2>
+                    <p class="subtitle">Real-time bus information, crowding predictions, and augmented reality bus stop finder.</p>
+                    <div class="search-box">
+                        <input type="text" id="routeStopSearchInput" placeholder="Search route, stop or destination...">
+                        <button id="searchRouteStopButton"><i class="fas fa-search"></i> Search</button>
+                    </div>
+                </div>
+                <div class="bus-animation">
+                    <!-- Simple CSS bus animation placeholder -->
+                    <div class="bus-icon"><i class="fas fa-bus"></i></div>
+                </div>
+            </div>
+        </section>
+
+        <section id="quick-actions" class="quick-actions-section">
+            <div class="container">
+                <div class="action-grid">
+                    <div class="action-item" id="find-my-bus">
+                        <i class="fas fa-location-arrow"></i>
+                        <h3>Find My Bus</h3>
+                        <p>Locate nearby buses & stops.</p>
+                    </div>
+                    <div class="action-item" id="plan-journey">
+                        <i class="fas fa-route"></i>
+                        <h3>Plan Journey</h3>
+                        <p>Get the best route to your destination.</p>
+                    </div>
+                    <div class="action-item" id="report-quick">
+                        <i class="fas fa-flag"></i>
+                        <h3>Quick Report</h3>
+                        <p>Issue or Lost & Found.</p>
+                    </div>
+                    <div class="action-item" id="view-schedules">
+                        <i class="fas fa-calendar-alt"></i>
+                        <h3>View Schedules</h3>
+                        <p>Browse routes & times.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="map-routes" class="map-section">
+            <div class="container">
+                <h2>Interactive Map & Routes</h2>
+                <div id="busMap" style="height: 500px; width: 100%;"></div>
+                <div class="map-controls">
+                    <select id="routeSelector">
+                        <option value="">Select a Route</option>
+                        <!-- Options will be loaded by JS -->
+                    </select>
+                    <button id="showAllBusesButton">Show All Buses</button>
+                </div>
+                <div id="route-details" class="card" style="display:none; margin-top: 20px;">
+                    <h3>Selected Route Details: <span id="selected-route-name"></span></h3>
+                    <p>Origin: <span id="route-origin"></span></p>
+                    <p>Destination: <span id="route-destination"></span></p>
+                    <h4>Upcoming Stops:</h4>
+                    <ul id="route-stops-list"></ul>
+                    <button class="small-button download-schedule-btn">Download Schedule</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="crowding-predictions" class="crowding-section">
+            <div class="container">
+                <h2>Predictive Crowding Indicator</h2>
+                <div class="crowding-input-group">
+                    <input type="text" id="crowdingStopInput" placeholder="Enter bus stop or route number">
+                    <button id="getCrowdingButton"><i class="fas fa-chart-bar"></i> Get Prediction</button>
+                </div>
+                <div id="crowding-results" class="card" style="display:none;">
+                    <h3>Crowding for <span id="crowding-target"></span>:</h3>
+                    <div class="crowding-level-display">
+                        <span id="crowding-status" class="crowding-status-text"></span>
+                        <div class="crowding-bar-container">
+                            <div id="crowding-bar" class="crowding-bar"></div>
+                        </div>
+                    </div>
+                    <p class="last-updated"><small>Last updated: <span id="crowding-last-updated"></span></small></p>
+                    <p class="tip-text">Tip: Consider alternative routes if "Likely Crowded".</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="ar-finder" class="ar-section">
+            <div class="container">
+                <h2>Augmented Reality (AR) Bus Stop Finder</h2>
+                <p class="description">Point your device's camera to instantly see nearby bus stops, their names, and real-time arrival info overlaid on your screen.</p>
+                <button id="startArButton"><i class="fas fa-camera"></i> Activate AR View</button>
+                <div id="ar-camera-feed" class="ar-placeholder">
+                    <i class="fas fa-video"></i>
+                    <p>AR Camera Feed Placeholder<br><small>Requires camera access and WebAR compatibility.</small></p>
+                    <div id="ar-overlays">
+                        <!-- AR content would dynamically appear here -->
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="community-feedback" class="feedback-section">
+            <div class="container">
+                <h2>Community-Driven Feedback</h2>
+                <p class="description">Your feedback helps improve our service. Report issues or use our Lost & Found portal.</p>
+                <div class="feedback-options-grid">
+                    <div class="feedback-option">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h3>Report an Issue</h3>
+                        <p>Late bus, cleanliness, safety concerns.</p>
+                        <button class="feedback-modal-btn" data-form-type="report">Report Issue</button>
+                    </div>
+                    <div class="feedback-option">
+                        <i class="fas fa-box-open"></i>
+                        <h3>Lost & Found</h3>
+                        <p>Help connect lost items with their owners.</p>
+                        <button class="feedback-modal-btn" data-form-type="lost_found">Lost & Found Portal</button>
+                    </div>
+                </div>
+                <div id="feedback-success-message" class="success-message" style="display:none;">
+                    <i class="fas fa-check-circle"></i> Thank you for your feedback!
+                </div>
+            </div>
+        </section>
+
+        <section id="offline-access" class="offline-section">
+            <div class="container">
+                <h2>Offline Access</h2>
+                <p class="description">Download schedules and plan routes even without an internet connection, once data has been loaded.</p>
+                <div class="offline-features-grid">
+                    <div class="offline-feature">
+                        <i class="fas fa-download"></i>
+                        <h3>Download Routes</h3>
+                        <p>Select routes to save for offline viewing.</p>
+                        <select id="offlineRouteSelector">
+                            <option value="">Select Route to Download</option>
+                        </select>
+                        <button id="downloadRouteButton" class="small-button">Download</button>
+                    </div>
+                    <div class="offline-feature">
+                        <i class="fas fa-list-alt"></i>
+                        <h3>View Saved Schedules</h3>
+                        <p>Access your downloaded content anytime.</p>
+                        <button id="viewOfflineContentButton" class="small-button">View Offline</button>
+                    </div>
+                </div>
+                <div id="offline-status" class="info-message" style="margin-top: 20px;">
+                    <i class="fas fa-info-circle"></i> Service Worker: <span id="sw-status">Not registered</span>
+                </div>
+                <div id="offline-saved-content" class="card" style="display:none; margin-top: 20px;">
+                    <h3>Your Downloaded Content:</h3>
+                    <ul id="saved-routes-list"></ul>
+                </div>
+            </div>
+        </section>
+
+        <section id="operators" class="operators-section">
+            <div class="container">
+                <h2>For Bus Operators & Transportation Authorities</h2>
+                <p class="description">Gain operational insights, manage fleet, and receive real-time passenger feedback to optimize service.</p>
+                <div class="operator-features-grid">
+                    <div class="operator-feature">
+                        <i class="fas fa-chart-line"></i>
+                        <h3>Operational Insights</h3>
+                        <p>Analyze ridership patterns, route performance.</p>
+                    </div>
+                    <div class="operator-feature">
+                        <i class="fas fa-headset"></i>
+                        <h3>Direct Feedback Channel</h3>
+                        <p>Receive passenger reports directly.</p>
+                    </div>
+                    <div class="operator-feature">
+                        <i class="fas fa-trophy"></i>
+                        <h3>Gamified Rewards (Future)</h3>
+                        <p>Encourage punctuality and driver performance.</p>
+                    </div>
+                </div>
+                <button class="primary-button learn-more-btn">Learn More for Operators</button>
+            </div>
+        </section>
+
+        <section id="partners" class="partners-section">
+            <div class="container">
+                <h2>Our Partners & Data Providers</h2>
+                <p class="description">We leverage cutting-edge technology and data to power BusNav.</p>
+                <div class="partners-logos">
+                    <!-- Placeholder for partner logos -->
+                    <img src="https://via.placeholder.com/100x50?text=API+Provider" alt="API Provider">
+                    <img src="https://via.placeholder.com/100x50?text=Map+Data" alt="Map Data Provider">
+                    <img src="https://via.placeholder.com/100x50?text=Gov+Agency" alt="Government Agency">
+                </div>
+                <button class="primary-button">Become a Partner</button>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2023 BusNav. All rights reserved. <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Modals -->
+    <div id="feedbackModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3 id="modal-title"></h3>
+            <p id="modal-description"></p>
+            <form id="feedbackForm">
+                <label for="feedbackMessage">Message:</label>
+                <textarea id="feedbackMessage" rows="6" required></textarea>
+                <label for="contactInfo">Email / Phone (Optional):</label>
+                <input type="text" id="contactInfo">
+                <button type="submit" class="primary-button">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+
+    <div id="journeyPlanModal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <h3>Plan Your Journey</h3>
+            <form id="journeyPlanForm">
+                <label for="startLocation">Start Location:</label>
+                <input type="text" id="startLocation" placeholder="e.g., My Current Location" required>
+                <label for="endLocation">Destination:</label>
+                <input type="text" id="endLocation" placeholder="e.g., Central Park" required>
+                <button type="submit" class="primary-button">Find Routes</button>
+            </form>
+            <div id="journey-results" style="margin-top: 20px;">
+                <h4>Recommended Routes:</h4>
+                <ul id="recommended-routes-list">
+                    <li>No routes found yet.</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Sidebar open/close logic
+        document.getElementById('sidebarHamburger').onclick = function() {
+            document.getElementById('sidebarNav').classList.add('open');
+        };
+        document.getElementById('sidebarCloseBtn').onclick = function() {
+            document.getElementById('sidebarNav').classList.remove('open');
+        };
+        // Optional: close sidebar when clicking a link
+        document.querySelectorAll('.sidebar-nav a').forEach(function(link) {
+            link.onclick = function() {
+                document.getElementById('sidebarNav').classList.remove('open');
+            };
+        });
+    </script>
+
+    <!-- Leaflet JS for interactive map -->
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <!-- AR.js A-Frame integration for WebAR (Highly experimental/conceptual for browser-only) -->
+    <!-- You might need to self-host or use a CDN that supports WebAR/A-Frame -->
+    <!-- <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script> -->
+    <!-- <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script> -->
+
+    <script src="service-worker-registration.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>
