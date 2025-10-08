@@ -12,8 +12,7 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-    <div class="navbar-toggle" id="navbarToggle">
-    <i class="fas fa-bars"></i>
+  
 </div>
 
 <aside class="icon-sidebar collapsed" id="iconSidebar">
@@ -29,15 +28,16 @@
 </aside>
 
     <header>
-          <a href="#hero" class="logo">BusNav</a>
+         <div class="container">
+    <a href="#hero" class="logo">BusNav</a>
 
-        <!-- ADD THIS: hamburger toggle -->
-        <button id="navbarToggle" class="navbar-toggle" aria-controls="iconSidebar" aria-expanded="false" aria-label="Open navigation">
-            <i class="fas fa-bars" aria-hidden="true"></i>
-        </button>
+    <!-- SINGLE hamburger toggle (keep only this one) -->
+    <button id="navbarToggle" class="navbar-toggle" aria-controls="iconSidebar" aria-expanded="false" aria-label="Open navigation">
+      <i class="fas fa-bars" aria-hidden="true"></i>
+    </button>
 
-        <!-- Old nav removed -->
-        </div>
+    <!-- Old nav removed -->
+  </div>
     </header>
 
 
@@ -292,5 +292,6 @@
     <script src="script.js"></script>
 </body>
 </html>
+
 
 
