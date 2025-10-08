@@ -12,32 +12,24 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
 </head>
 <body>
-  
-</div>
-
-<aside class="icon-sidebar collapsed" id="iconSidebar">
-    <ul>
-        <li><a href="#home" title="Home"><i class="fas fa-home"></i></a></li>
-        <li><a href="#map-routes" title="Map & Routes"><i class="fas fa-map"></i></a></li>
-        <li><a href="#crowding-predictions" title="Crowding"><i class="fas fa-chart-bar"></i></a></li>
-        <li><a href="#ar-finder" title="AR Finder"><i class="fas fa-camera"></i></a></li>
-        <li><a href="#community-feedback" title="Feedback"><i class="fas fa-comments"></i></a></li>
-        <li><a href="#offline-access" title="Offline"><i class="fas fa-download"></i></a></li>
-        <li><a href="#operators" title="Operators"><i class="fas fa-user-tie"></i></a></li>
-    </ul>
-</aside>
+    <aside class="icon-sidebar" id="iconSidebar">
+        <ul>
+            <li><a href="#" title="Home"><i class="fas fa-home"></i></a></li>
+            <li><a href="#map-routes" title="Map & Routes"><i class="fas fa-map"></i></a></li>
+            <li><a href="#crowding-predictions" title="Crowding"><i class="fas fa-chart-bar"></i></a></li>
+            <li><a href="#community-feedback" title="Feedback"><i class="fas fa-comments"></i></a></li>
+            <li><a href="#offline-access" title="Offline"><i class="fas fa-download"></i></a></li>
+            <li><a href="#operators" title="Operators"><i class="fas fa-user-tie"></i></a></li>
+        </ul>
+    </aside>
 
     <header>
-         <div class="container">
-    <a href="#hero" class="logo">BusNav</a>
-
-    <!-- SINGLE hamburger toggle (keep only this one) -->
-    <button id="navbarToggle" class="navbar-toggle" aria-controls="iconSidebar" aria-expanded="false" aria-label="Open navigation">
-      <i class="fas fa-bars" aria-hidden="true"></i>
-    </button>
-
-    <!-- Old nav removed -->
-  </div>
+        <div class="container">
+            <a href="#hero" class="logo">
+                <img src="Logo-Header.png" alt="BusNav Logo" style="height:70px; vertical-align:middle;">
+            </a>
+            <!-- Old nav removed -->
+        </div>
     </header>
 
 
@@ -129,21 +121,6 @@
             </div>
         </section>
 
-        <section id="ar-finder" class="ar-section">
-            <div class="container">
-                <h2>Augmented Reality (AR) Bus Stop Finder</h2>
-                <p class="description">Point your device's camera to instantly see nearby bus stops, their names, and real-time arrival info overlaid on your screen.</p>
-                <button id="startArButton"><i class="fas fa-camera"></i> Activate AR View</button>
-                <div id="ar-camera-feed" class="ar-placeholder">
-                    <i class="fas fa-video"></i>
-                    <p>AR Camera Feed Placeholder<br><small>Requires camera access and WebAR compatibility.</small></p>
-                    <div id="ar-overlays">
-                        <!-- AR content would dynamically appear here -->
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <section id="community-feedback" class="feedback-section">
             <div class="container">
                 <h2>Community-Driven Feedback</h2>
@@ -224,19 +201,19 @@
             </div>
         </section>
 
-        <section id="partners" class="partners-section">
+        <!-- <section id="partners" class="partners-section">
             <div class="container">
                 <h2>Our Partners & Data Providers</h2>
                 <p class="description">We leverage cutting-edge technology and data to power BusNav.</p>
-                <div class="partners-logos">
+                <div class="partners-logos"> -->
                     <!-- Placeholder for partner logos -->
-                    <img src="https://via.placeholder.com/100x50?text=API+Provider" alt="API Provider">
+                    <!-- <img src="https://via.placeholder.com/100x50?text=API+Provider" alt="API Provider">
                     <img src="https://via.placeholder.com/100x50?text=Map+Data" alt="Map Data Provider">
                     <img src="https://via.placeholder.com/100x50?text=Gov+Agency" alt="Government Agency">
                 </div>
                 <button class="primary-button">Become a Partner</button>
             </div>
-        </section>
+        </section> -->
     </main>
 
     <footer>
@@ -292,6 +269,3 @@
     <script src="script.js"></script>
 </body>
 </html>
-
-
-
