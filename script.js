@@ -185,4 +185,63 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         }
     }
+
+    // ===== Collapsible Sidebar Toggle & Behavior =====
+    const navbarToggleBtn = document.getElementById('navbarToggle');
+    const iconSidebarEl = document.getElementById('iconSidebar');
+    const bodyEl = document.body;
+
+    function openSidebar() {
+        if (!iconSidebarEl) return;
+        iconSidebarEl.classList.add('active');
+        bodyEl.classList.add('sidebar-open');
+        if (navbarToggleBtn) navbarToggleBtn.setAttribute('aria-expanded', 'true');
+        if (navbarToggleBtn && navbarToggleBtn.querySelector('i')) {
+            navbarToggleBtn.querySelector('i').classList.remove('fa-bars');
+            navbarToggleBtn.querySelector('i').classList.add('fa-times');
+        }
+    }
+
+    function closeSidebar() {
+        if (!iconSidebarEl) return;
+        iconSidebarEl.classList.remove('active');
+        bodyEl.classList.remove('sidebar-open');
+        bodyEl.classList.remove('sidebar-expanded');
+        if (navbarToggleBtn) navbarToggleBtn.setAttribute('aria-expanded', 'false');
+        if (navbarToggleBtn && navbarToggleBtn.querySelector('i')) {
+            navbarToggleBtn.querySelector('i').classList.remove('fa-times');
+            navbarToggleBtn.querySelector('i').classList.add('fa-bars');
+        }
+    }
+
+    if (navbarToggleBtn && iconSidebarEl) {
+        navbarToggleBtn.addEventListener('click', () => {
+            const isOpen = iconSidebarEl.classList.contains('active');
+            if (isOpen) closeSidebar(); else openSidebar();
+        });
+
+        // Close when clicking outside the sidebar (but not when clicking the toggle)
+        document.addEventListener('click', (e) => {
+            if (!iconSidebarEl.classList.contains('active')) return;
+            const clickInsideSidebar = iconSidebarEl.contains(e.target);
+            const clickToggle = navbarToggleBtn.contains(e.target);
+            if (!clickInsideSidebar && !clickToggle) {
+                closeSidebar();
+            }
+        });
+
+        // Close on Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && iconSidebarEl.classList.contains('active')) {
+                closeSidebar();
+            }
+        });
+
+        // Close sidebar when any anchor inside it is clicked (good UX for single-page anchors)
+        iconSidebarEl.querySelectorAll('a').forEach(a => {
+            a.addEventListener('click', () => {
+                setTimeout(() => closeSidebar(), 150);
+            });
+        });
+    }
 });
