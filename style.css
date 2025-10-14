@@ -456,27 +456,35 @@ body {
     width: 100%;
     max-width: 800px;
     margin: 0 auto 30px;
-    cursor: pointer; /* Indicates it's clickable */
 }
 
 .search-box {
     display: flex;
     width: 100%;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-    border-radius: 50px;
+    max-width: 600px;
+    margin: 0 auto;
+    position: relative;
+    background: white;
+    border-radius: 30px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
     overflow: hidden;
 }
 
 #routeStopSearchInput {
     flex: 1;
-    padding: 15px 25px;
-    border: 2px solid #e0e0e0;
-    border-right: none;
-    border-radius: 50px 0 0 50px;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 30px 0 0 30px;
     font-size: 1rem;
     outline: none;
     transition: all 0.3s ease;
+    height: 56px;
+    box-sizing: border-box;
+    background-color: white;
+    color: #333;
 }
+
+/* Removed the search icon */
 
 #routeStopSearchInput:focus {
     border-color: var(--primary-color);
@@ -484,13 +492,17 @@ body {
 }
 
 #searchRouteStopButton {
-    background: var(--primary-color);
+    background: #4a6bff;
     color: white;
     border: none;
-    padding: 0 30px;
+    padding: 0 25px;
     cursor: pointer;
     font-weight: 600;
+    font-size: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
     transition: all 0.3s ease;
+    white-space: nowrap;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -536,44 +548,126 @@ body {
     box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
 }
 
+/* Modal search input and button */
+.modal-search-container {
+    display: flex;
+    width: 100%;
+    margin: 20px 0;
+    border-radius: 30px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+#modalSearchInput {
+    flex: 1;
+    padding: 15px 25px;
+    border: none;
+    font-size: 1rem;
+    outline: none;
+    background: #f8f9fa;
+}
+
+#modalSearchButton {
+    background: #4a6bff;
+    color: white;
+    border: none;
+    padding: 0 30px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+#modalSearchButton:hover {
+    background: #3a5bdf;
+}
+
+#modalSearchButton i {
+    font-size: 1rem;
+}
+
 .search-modal.active .search-modal-content {
     transform: translateY(0);
 }
 
 .close-search {
     position: absolute;
-    top: 15px;
-    right: 15px;
-    background: none;
+    top: 25px;
+    right: 25px;
+    width: 40px;
+    height: 40px;
+    background: #f8f9fa;
     border: none;
-    font-size: 1.5rem;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     cursor: pointer;
     color: #666;
-    transition: color 0.2s;
+    font-size: 1.25rem;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
 }
 
 .close-search:hover {
-    color: #333;
+    background: #4a6bff;
+    color: white;
+    transform: rotate(90deg) scale(1.1);
+    box-shadow: 0 4px 12px rgba(74, 107, 255, 0.3);
+}
+
+/* Add a subtle pulse animation on hover */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+.close-search:hover::before {
+    content: '';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: rgba(74, 107, 255, 0.2);
+    animation: pulse 1.5s infinite;
+}
+
+/* Make the close button more touch-friendly on mobile */
+@media (max-width: 768px) {
+    .close-search {
+        top: 15px;
+        right: 15px;
+        width: 36px;
+        height: 36px;
+        font-size: 1.1rem;
+    }
 }
 
 /* Search Suggestions Container */
-#modalSearchSuggestions, #searchSuggestions {
-    position: fixed;
-    left: 50%;
-    top: 200px; /* Adjust this value based on your header height */
-    transform: translateX(-50%) translateY(0);
-    -webkit-transform: translateX(-50%) translateY(0);
-    width: calc(100% - 40px);
-    max-width: 800px;
+#searchSuggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
     max-height: 300px;
     overflow-y: auto;
     background: white;
     border: 1px solid #e0e0e0;
-    border-radius: 8px;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-    z-index: 9999;
-    display: none;
-    margin-top: 10px;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    z-index: 1000;
+    margin-top: -1px; /* To overlap the border with the search box */
+    display: none; /* Hidden by default */
 }
 
 /* Hide scrollbar for WebKit browsers */
@@ -600,19 +694,68 @@ body {
     align-items: center;
     padding: 12px 20px;
     cursor: pointer;
-    transition: background-color 0.2s;
-    border-bottom: 1px solid #f0f0f0;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: all 0.2s ease;
+    border-left: 3px solid transparent;
 }
 
 .suggestion-item:hover {
     background-color: #f8f9fa;
+    transform: translateX(4px);
+}
+
+/* Destination (red) */
+.suggestion-item[data-type="destination"] {
+    border-left-color: #ff4a4a;
+}
+
+.suggestion-item[data-type="destination"] i {
+    color: #ff4a4a;
+}
+
+/* Stop (yellow) */
+.suggestion-item[data-type="stop"] {
+    border-left-color: #ffc107;
+}
+
+.suggestion-item[data-type="stop"] i {
+    color: #ffc107;
+}
+
+/* Landmark (green) */
+.suggestion-item[data-type="landmark"] {
+    border-left-color: #4caf50;
+}
+
+.suggestion-item[data-type="landmark"] i {
+    color: #4caf50;
+}
+
+/* Origin (blue) */
+.suggestion-item[data-type="origin"] {
+    border-left-color: #2196f3;
+}
+
+.suggestion-item[data-type="origin"] i {
+    color: #2196f3;
 }
 
 .suggestion-item i {
-    margin-right: 12px;
-    color: #666;
     width: 20px;
     text-align: center;
+    font-size: 1.1em;
+}
+
+.suggestion-type {
+    margin-left: auto;
+    font-size: 0.8em;
+    color: #666;
+    background: #f0f0f0;
+    padding: 2px 8px;
+    border-radius: 10px;
+    text-transform: capitalize;
 }
 
 .suggestion-item .suggestion-text {
@@ -1444,6 +1587,3 @@ body, input, button, textarea {
         font-size: 0.95em;
     }
 }
-
-
-

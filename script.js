@@ -184,31 +184,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     ];
 
-    // Custom icons
+    // Custom icons with consistent color scheme
     const icons = {
         departure: L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png',
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png', // Blue for origin
             iconSize: [25, 41],
             iconAnchor: [12, 41],
-            popupAnchor: [1, -34]
+            popupAnchor: [1, -34],
+            className: 'map-marker origin-marker'
         }),
         destination: L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png',
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-red.png', // Red for destination
             iconSize: [25, 41],
             iconAnchor: [12, 41],
-            popupAnchor: [1, -34]
+            popupAnchor: [1, -34],
+            className: 'map-marker destination-marker'
         }),
         landmark: L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-gold.png',
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-green.png', // Green for landmarks
             iconSize: [25, 41],
             iconAnchor: [12, 41],
-            popupAnchor: [1, -34]
+            popupAnchor: [1, -34],
+            className: 'map-marker landmark-marker'
         }),
         stop: L.icon({
-            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-blue.png',
+            iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-orange.png', // Yellow/Orange for stops
             iconSize: [25, 41],
             iconAnchor: [12, 41],
-            popupAnchor: [1, -34]
+            popupAnchor: [1, -34],
+            className: 'map-marker stop-marker'
         })
     };
 
@@ -543,6 +547,7 @@ document.addEventListener('DOMContentLoaded', () => {
         function createSuggestionItem(destination) {
             const item = document.createElement('div');
             item.className = 'suggestion-item';
+            item.setAttribute('data-type', destination.type);
             
             const icon = document.createElement('i');
             icon.className = getSuggestionIcon(destination.type);
