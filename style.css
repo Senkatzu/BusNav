@@ -450,11 +450,176 @@ body {
     text-align: center;
 }
 
+/* Search Container */
+.search-container {
+    position: relative;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto 30px;
+    cursor: pointer; /* Indicates it's clickable */
+}
+
+.search-box {
+    display: flex;
+    width: 100%;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    border-radius: 50px;
+    overflow: hidden;
+}
+
+#routeStopSearchInput {
+    flex: 1;
+    padding: 15px 25px;
+    border: 2px solid #e0e0e0;
+    border-right: none;
+    border-radius: 50px 0 0 50px;
+    font-size: 1rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+#routeStopSearchInput:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 3px rgba(52, 152, 219, 0.2);
+}
+
+#searchRouteStopButton {
+    background: var(--primary-color);
+    color: white;
+    border: none;
+    padding: 0 30px;
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-radius: 0 50px 50px 0;
+}
+
+#searchRouteStopButton:hover {
+    background: #2980b9;
+    transform: none;
+}
+
+/* Search Modal */
+.search-modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.search-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.search-modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 700px;
+    position: relative;
+    transform: translateY(20px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+.search-modal.active .search-modal-content {
+    transform: translateY(0);
+}
+
+.close-search {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: #666;
+    transition: color 0.2s;
+}
+
+.close-search:hover {
+    color: #333;
+}
+
+/* Search Suggestions Container */
+#modalSearchSuggestions, #searchSuggestions {
+    position: fixed;
+    left: 50%;
+    top: 200px; /* Adjust this value based on your header height */
+    transform: translateX(-50%) translateY(0);
+    -webkit-transform: translateX(-50%) translateY(0);
+    width: calc(100% - 40px);
+    max-width: 800px;
+    max-height: 300px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    z-index: 9999;
+    display: none;
+    margin-top: 10px;
+}
+
+/* Hide scrollbar for WebKit browsers */
+#searchSuggestions::-webkit-scrollbar {
+    width: 8px;
+}
+
+#searchSuggestions::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+}
+
+#searchSuggestions::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+}
+
+#searchSuggestions::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.suggestion-item:hover {
+    background-color: #f8f9fa;
+}
+
+.suggestion-item i {
+    margin-right: 12px;
+    color: #666;
+    width: 20px;
+    text-align: center;
+}
+
 .suggestion-item .suggestion-text {
     flex: 1;
-    color: #333; /* Ensure text is dark gray */
-    font-size: 14px; /* Slightly smaller than the base */
-    font-weight: 500; /* Medium weight for better readability */
+    color: #333;
+    font-size: 15px;
+    font-weight: 500;
 }
 
 .suggestion-item .suggestion-type {
@@ -464,6 +629,18 @@ body {
     padding: 2px 8px;
     border-radius: 10px;
     text-transform: capitalize;
+}
+
+.suggestion-heading {
+    color: #000000;
+    font-size: 14px;
+    padding: 8px 20px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #e9ecef;
+    margin: 0;
 }
 
 /* Bus Animation */

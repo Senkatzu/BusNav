@@ -6,26 +6,31 @@ let currentRoute = null;
 let routeLayers = null;
 let stopMarkers = null;
 
-// Available destinations for search
+// Define destinations for search
 const destinations = [
-    { id: '1', name: 'Panglao', type: 'destination', routeId: '1' },
-    { id: '2', name: 'Tubigon', type: 'destination', routeId: '2' },
-    { id: '3', name: 'Dauis', type: 'stop', routeId: '1' },
-    { id: '4', name: 'Tagbilaran', type: 'origin', routeId: '1' },
-    { id: '5', name: 'Island City Mall', type: 'stop', routeId: '1' },
-    { id: '6', name: 'Tagbilaran Integrated Bus Terminal', type: 'stop', routeId: '1' },
-    { id: '7', name: 'Dauis Church', type: 'stop', routeId: '1' },
+    // Panglao Route
+    { name: 'Panglao', type: 'destination', routeId: 'tagbilaran-panglao' },
+    { name: 'Island City Mall', type: 'stop', routeId: 'tagbilaran-panglao' },
+    { name: 'Integrated Bus Terminal', type: 'origin', routeId: 'tagbilaran-panglao' },
+    { name: 'Bohol Tarsier Conservation Area', type: 'landmark', routeId: 'tagbilaran-panglao' },
+    { name: 'Bilar Man-Made Forest', type: 'landmark', routeId: 'tagbilaran-panglao' },
+    { name: 'Chocolate Hills Complex', type: 'landmark', routeId: 'tagbilaran-panglao' },
+    
+    // Tubigon Route
+    { name: 'Tubigon', type: 'destination', routeId: 'tagbilaran-tubigon' },
+    { name: 'President Carlos P. Garcia Park', type: 'landmark', routeId: 'tagbilaran-tubigon' },
+    { name: 'Baranggay Mangga Public Market', type: 'stop', routeId: 'tagbilaran-tubigon' },
+    { name: 'Abatan River Community Life Tour', type: 'landmark', routeId: 'tagbilaran-tubigon' },
+    { name: 'Maribojoc Public Market', type: 'stop', routeId: 'tagbilaran-tubigon' },
+    { name: 'Basdacu White Sand', type: 'landmark', routeId: 'tagbilaran-tubigon' },
+    { name: 'Loon Public Market', type: 'stop', routeId: 'tagbilaran-tubigon' },
+    { name: 'Bohol Island State University', type: 'landmark', routeId: 'tagbilaran-tubigon' },
+    { name: 'Dreamers Coffee Cahayag Tubigon', type: 'landmark', routeId: 'tagbilaran-tubigon' },
+    { name: 'Tubigon Public Market', type: 'destination', routeId: 'tagbilaran-tubigon' },
     { id: '8', name: 'Panglao Town Proper', type: 'stop', routeId: '1' },
     { id: '9', name: 'Alona Beach', type: 'stop', routeId: '1' },
-    { id: '10', name: 'President Carlos P. Garcia Park', type: 'landmark', routeId: '2' },
-    { id: '11', name: 'Baranggay Mangga Public Market', type: 'stop', routeId: '2' },
-    { id: '12', name: 'Abatan River Community Life Tour', type: 'landmark', routeId: '2' },
-    { id: '13', name: 'Maribojoc Public Market', type: 'stop', routeId: '2' },
-    { id: '14', name: 'Basdacu White Sand', type: 'landmark', routeId: '2' },
-    { id: '15', name: 'Loon Public Market', type: 'stop', routeId: '2' },
-    { id: '16', name: 'Bohol Island State University', type: 'landmark', routeId: '2' },
-    { id: '17', name: 'Dreamers Coffee Cahayag Tubigon', type: 'landmark', routeId: '2' },
-    { id: '18', name: 'Tubigon Public Market', type: 'destination', routeId: '2' }
+    { id: '10', name: 'Tubigon Port', type: 'stop', routeId: '2' },
+    { id: '11', name: 'Tubigon Town Proper', type: 'stop', routeId: '2' }
 ];
 
 // Custom control for location button
@@ -169,17 +174,17 @@ document.addEventListener('DOMContentLoaded', () => {
             name: 'Tagbilaran to Tubigon', 
             color: '#3498db',
             stops: [
-                { name: 'Island City Mall', lat: 9.65496690313405, lng: 123.86972976392552, type: 'departure' },
-                { name: 'Tagbilaran Integrated Bus Terminal', lat: 9.65508395817522, lng: 123.87153193587336, type: 'stop' },
-                { name: 'President Carlos P. Garcia Park (Carlos P. Garcia North Avenue)', lat: 9.6631, lng: 123.8578, type: 'landmark' },
-                { name: 'Baranggay Mangga Public Market', lat: 9.693537203718986, lng: 123.86355647141978, type: 'stop' },
-                { name: 'Abatan River Community Life Tour', lat: 9.714820173460142, lng: 123.8741641076556, type: 'landmark' },
-                { name: 'Maribojoc Public Market', lat: 9.742290047361612, lng: 123.84396592921429, type: 'stop' },
-                { name: 'Basdacu White Sand', lat: 9.78862303081743, lng: 123.78551605393541, type: 'landmark' },
-                { name: 'Loon Public Market', lat: 9.811123615437479, lng: 123.80097617205007, type: 'stop' },
-                { name: 'Bohol Island State University', lat: 9.895404142571952, lng: 123.8825386986453, type: 'landmark' },
-                { name: 'Dreamers Coffee Cahayag Tubigon', lat: 9.918468046599694, lng: 123.92805786412175, type: 'landmark' },
-                { name: 'Tubigon Public Market', lat: 9.95269166406004, lng: 123.96159358936276, type: 'destination' }
+                { name: 'Island City Mall', lat: 9.6392, lng: 123.8583 },
+                { name: 'Integrated Bus Terminal', lat: 9.6425, lng: 123.85 },
+                { name: 'President Carlos P. Garcia Park', lat: 9.6599486, lng: 123.8583126, isLandmark: true },
+                { name: 'Baranggay Mangga Public Market', lat: 9.6935372, lng: 123.8635565, isBusStop: true },
+                { name: 'Abatan River Community Life Tour', lat: 9.7148202, lng: 123.8741641, isLandmark: true },
+                { name: 'Maribojoc Public Market', lat: 9.7422900, lng: 123.8439659, isBusStop: true },
+                { name: 'Basdacu White Sand', lat: 9.7886230, lng: 123.7855161, isLandmark: true },
+                { name: 'Loon Public Market', lat: 9.8111236, lng: 123.8009762, isBusStop: true },
+                { name: 'Bohol Island State University', lat: 9.8954041, lng: 123.8825387, isLandmark: true },
+                { name: 'Dreamers Coffee Cahayag Tubigon', lat: 9.9184680, lng: 123.9280579, isLandmark: true },
+                { name: 'Tubigon Public Market', lat: 9.9526917, lng: 123.9615936, isDestination: true }
             ]
         }
     ];
@@ -315,46 +320,6 @@ document.addEventListener('DOMContentLoaded', () => {
         
         // If no route ID provided, just clear the map
         if (!routeId) {
-            map.setView([9.6425, 123.85], 10);
-            currentRoute = null;
-            return;
-        }
-        
-        // Find the selected route
-        const route = routes.find(r => r.id === routeId);
-        if (!route) return;
-        
-        currentRoute = route;
-        
-        // If user location is available, use it as the starting point
-        if (userLocation) {
-            updateRouteWithUserLocation(route);
-        } else {
-            // Otherwise, show the default route
-            getRoute(route);
-        }
-        
-        // Update route details
-        updateRouteDetails(route);
-        
-        // Show route details
-        document.getElementById('route-details').style.display = 'block';
-        
-        // Scroll to map section
-        document.getElementById('map-routes').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    // Function to update route details in the UI
-    function updateRouteDetails(route) {
-        const detailsDiv = document.getElementById('route-details');
-        const stopsList = document.getElementById('route-stops-list');
-        
-        document.getElementById('selected-route-name').textContent = route.name;
-        document.getElementById('route-origin').textContent = route.stops[0].name;
-        document.getElementById('route-destination').textContent = route.stops[route.stops.length - 1].name;
-        
-        // Update distance and duration if available
-        if (route.distance) {
             const distanceElement = document.getElementById('route-distance') || document.createElement('div');
             distanceElement.id = 'route-distance';
             distanceElement.innerHTML = `<strong>Distance:</strong> ${route.distance} | <strong>Duration:</strong> ${route.duration || 'N/A'}`;
@@ -408,95 +373,39 @@ document.addEventListener('DOMContentLoaded', () => {
         map.fitBounds(bounds.pad(0.2));
     }
     
-    // Function to initialize search functionality
-    function initSearch() {
-        const searchModal = document.getElementById('searchModal');
-        const searchInput = document.getElementById('modalSearchInput');
-        const searchButton = document.getElementById('modalSearchButton');
-        const closeSearch = document.getElementById('closeSearch');
-        const suggestionsContainer = document.getElementById('modalSearchSuggestions');
-        const originalSearchInput = document.getElementById('routeStopSearchInput');
+    // Initialize search functionality
+    const searchInput = document.getElementById('routeStopSearchInput');
+    const searchButton = document.getElementById('searchRouteStopButton');
+    const searchSuggestions = document.getElementById('searchSuggestions');
+    
+    // Show popular destinations when search is focused
+    searchInput.addEventListener('focus', function() {
+        showSuggestions('');
+    });
+
+    // Handle search input
+    searchInput.addEventListener('input', function() {
+        showSuggestions(this.value);
+    });
+
+    // Handle search button click
+    searchButton.addEventListener('click', function() {
+        const query = searchInput.value.trim();
+        if (!query) return;
         
-        // Open search modal when clicking the search bar
-        originalSearchInput.addEventListener('click', (e) => {
-            e.preventDefault();
-            openSearchModal();
-        });
+        // Find exact match first
+        const destination = destinations.find(dest => 
+            dest.name.toLowerCase() === query.toLowerCase()
+        );
         
-        // Close search modal when clicking the close button
-        closeSearch.addEventListener('click', closeSearchModal);
-        
-        // Close modal when clicking outside the content
-        searchModal.addEventListener('click', (e) => {
-            if (e.target === searchModal) {
-                closeSearchModal();
-            }
-        });
-        
-        // Handle input for search suggestions
-        searchInput.addEventListener('input', (e) => {
-            showSuggestions(e.target.value, suggestionsContainer);
-        });
-        
-        // Handle search button click in modal
-        searchButton.addEventListener('click', () => {
-            performSearch(searchInput.value.trim(), searchInput);
-        });
-        
-        // Handle Enter key in search input
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                performSearch(searchInput.value.trim(), searchInput);
-            }
-        });
-        
-        function openSearchModal() {
-            searchModal.classList.add('active');
-            searchInput.focus();
-            document.body.style.overflow = 'hidden'; // Prevent scrolling when modal is open
-        }
-        
-        function closeSearchModal() {
-            searchModal.classList.remove('active');
-            document.body.style.overflow = ''; // Re-enable scrolling
-            // Copy the search term to the original input if needed
-            if (searchInput.value) {
-                originalSearchInput.value = searchInput.value;
-            }
-        }
-        
-        function performSearch(term, inputElement) {
-            if (!term) return;
-            
-            const destination = destinations.find(dest => 
-                dest.name.toLowerCase() === term.toLowerCase()
+        if (destination) {
+            showRoute(destination.routeId);
+            document.getElementById('map-routes').scrollIntoView({ behavior: 'smooth' });
+        } else {
+            // If no exact match, try to find a partial match
+            const partialMatch = destinations.find(dest => 
+                dest.name.toLowerCase().includes(query.toLowerCase())
             );
-            
-            if (destination) {
-                closeSearchModal();
-                showRoute(destination.routeId);
-            } else {
-                // If no exact match, try to find a partial match
-                const partialMatch = destinations.find(dest => 
-                    dest.name.toLowerCase().includes(term.toLowerCase())
-                );
-                
-                if (partialMatch) {
-                    inputElement.value = partialMatch.name;
-                    showSuggestions(partialMatch.name, suggestionsContainer);
-                } else {
-                    showNoResults(suggestionsContainer);
-                }
-            }
-        }
-        
-        // Function to show search suggestions
-        function showSuggestions(query, container) {
-            const suggestionsList = document.createElement('div');
-            suggestionsList.className = 'suggestions-list';
-            
-            // Always show the container when this function is called
-            container.style.display = 'block';
             
             if (!query) {
                 // Show popular destinations when input is empty
@@ -535,81 +444,69 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             // Update suggestions container
-            container.innerHTML = '';
-            container.appendChild(suggestionsList);
-        }
-        
-        // Function to create a suggestion item
-        function createSuggestionItem(destination) {
-            const item = document.createElement('div');
-            item.className = 'suggestion-item';
-            
-            const icon = document.createElement('i');
-            icon.className = getSuggestionIcon(destination.type);
-            
-            const text = document.createElement('span');
-            text.className = 'suggestion-text';
-            text.textContent = destination.name;
-            
-            const type = document.createElement('span');
-            type.className = 'suggestion-type';
-            type.textContent = destination.type;
-            
-            item.appendChild(icon);
-            item.appendChild(text);
-            item.appendChild(type);
-            
-            item.addEventListener('click', () => {
-                const searchInput = document.getElementById('modalSearchInput');
-                searchInput.value = destination.name;
-                // Don't close the modal or redirect here, just update the input
-            });
-            
-            return item;
-        }
-        
-        // Function to show no results message
-        function showNoResults(container) {
-            const noResults = document.createElement('div');
-            noResults.className = 'suggestion-item no-results';
-            noResults.textContent = 'No destinations found';
-            container.innerHTML = '';
-            container.appendChild(noResults);
-            container.style.display = 'block';
-        }
-        
-        // Function to get icon class based on destination type
-        function getSuggestionIcon(type) {
-            switch(type) {
-                case 'destination':
-                    return 'fas fa-map-marker-alt';
-                case 'origin':
-                    return 'fas fa-flag';
-                case 'stop':
-                    return 'fas fa-map-pin';
-                default:
-                    return 'fas fa-search';
-            }
+            suggestionsContainer.innerHTML = '';
+    
+    // If user location is available, use it as the starting point
+    if (userLocation) {
+        updateRouteWithUserLocation(route);
+    } else {
+        // Otherwise, show the default route
+        getRoute(route);
+    }
+    
+    // Update route details
+    updateRouteDetails(route);
+    
+    // Show route details
+    document.getElementById('route-details').style.display = 'block';
+    
+    // Scroll to map section
+    document.getElementById('map-routes').scrollIntoView({ behavior: 'smooth' });
+}
+
+// Function to update route details in the UI
+function updateRouteDetails(route) {
+    const detailsDiv = document.getElementById('route-details');
+    const stopsList = document.getElementById('route-stops-list');
+    
+    document.getElementById('selected-route-name').textContent = route.name;
+    document.getElementById('route-origin').textContent = route.stops[0].name;
+    document.getElementById('route-destination').textContent = route.stops[route.stops.length - 1].name;
+    
+    // Update distance and duration if available
+    if (route.distance) {
+        const distanceElement = document.getElementById('route-distance') || document.createElement('div');
+        distanceElement.id = 'route-distance';
+        distanceElement.innerHTML = `<strong>Distance:</strong> ${route.distance} | <strong>Duration:</strong> ${route.duration || 'N/A'}`;
+        if (!document.getElementById('route-distance')) {
+            detailsDiv.insertBefore(distanceElement, stopsList);
+        } else {
+            distanceElement.textContent = `Distance: ${route.distance} | Duration: ${route.duration || 'N/A'}`;
         }
     }
+    
+    stopsList.innerHTML = '';
+    route.stops.forEach((stop, index) => {
+        const li = document.createElement('li');
+        li.className = `stop-item ${stop.type}`;
+        li.innerHTML = `
+            <span class="stop-name">${stop.name}</span>
+            <span class="stop-type">${stop.type.charAt(0).toUpperCase() + stop.type.slice(1)}</span>
+        `;
+        stopsList.appendChild(li);
+    });
+    
+    detailsDiv.style.display = 'block';
+}
 
-    // Initialize the search functionality
-    initSearch();
-    
-    // Initialize route selector (now hidden, using search instead)
-    const routeSelector = document.getElementById('routeSelector');
-    
-    // Set initial map view to show all routes
-    const bounds = L.latLngBounds(
-        routes.flatMap(route => route.stops.map(stop => [stop.lat, stop.lng]))
-    );
-    map.fitBounds(bounds.pad(0.2));
-    
-    // Add default OpenStreetMap layer
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '© OpenStreetMap contributors',
-        maxZoom: 19
-    }).addTo(map);
-    
-    L.control.layers(baseLayers, null, {position: 'topright'}).addTo(map);
+
+
+// Initialize search functionality
+const searchInput = document.getElementById('routeStopSearchInput');
+const searchButton = document.getElementById('searchRouteStopButton');
+const searchSuggestions = document.getElementById('searchSuggestions');
+
+// Show popular destinations when search is focused
+searchInput.addEventListener('focus', function() {
+    showSuggestions('');
 });

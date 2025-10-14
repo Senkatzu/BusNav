@@ -86,13 +86,6 @@
             <div class="container">
                 <h2>Interactive Map & Routes</h2>
                 <div id="busMap" style="height: 500px; width: 100%;"></div>
-                <div class="map-controls">
-                    <select id="routeSelector">
-                        <option value="">Select a Route</option>
-                        <!-- Options will be loaded by JS -->
-                    </select>
-                    <button id="showAllBusesButton">Show All Buses</button>
-                </div>
                 <div id="route-details" class="card" style="display:none; margin-top: 20px;">
                     <h3>Selected Route Details: <span id="selected-route-name"></span></h3>
                     <p>Origin: <span id="route-origin"></span></p>
@@ -260,6 +253,22 @@
             
     <!-- Our Scripts -->
     <script src="service-worker-registration.js"></script>
+    <!-- Search Modal -->
+    <div id="searchModal" class="search-modal">
+        <div class="search-modal-content">
+            <div class="search-box">
+                <input type="text" id="modalSearchInput" placeholder="Search destination (e.g., Panglao, Tubigon)..." autocomplete="off">
+                <button id="modalSearchButton"><i class="fas fa-search"></i> Search</button>
+            </div>
+            <div id="modalSearchSuggestions" class="search-suggestions">
+                <!-- Suggestions will be populated by JavaScript -->
+            </div>
+            <button class="close-search" id="closeSearch">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+    </div>
+
     <script src="script.js"></script>
 </body>
 </html>
